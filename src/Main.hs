@@ -1,14 +1,14 @@
 import Numeric.LinearAlgebra
+import Control.Monad
 
 disp = putStr . dispf 2
 latex m = putStrLn $ latexFormat "array" (dispf 2 m)
-m = (3><4)[1..] :: Matrix Double
---(q,r) = qr m
 
-generator :: [Matrix Double]
+generator :: Int -> Int -> Int -> [Matrix Double]
 
-generator =
-   lista=[[i
+generator s m n =
+   xs = replicateM m [-s..s]
+   
 
 main = do
   disp m

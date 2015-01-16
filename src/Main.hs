@@ -47,8 +47,7 @@ generator s m n =
           ys = [[fromIntegral z :: Double | z <- x] | x <- xs]
           ys1 = shuffle 5302946104563828 (length ys) ys
           zs = generator s m (n-1)
-          zs1 = shuffle 674857894620857 (length zs) zs
-      in [x++[y]| x<- zs1,y<- ys1]
+      in [x++[y]| x<- zs,y<- ys1]
 
 conversion = map fromLists
 
@@ -56,7 +55,5 @@ selection r1 r2 = filter (\a -> rank a >= r1 && rank a <=r2)
 
 main = do
       let xs = generator 2 5 4
-          ys = take 500 $ selection 2 2 (conversion xs)
-          zs = shuffle 89309170391038948 (length ys) ys
-          zss = take 10 zs
-      disp_ls zss
+          ys = take 50 $ selection 2 2 (conversion xs)
+      disp_ls ys

@@ -10,8 +10,7 @@ author: Andrei Halanay
 data-dir: ""
 
 executable Examen
-    build-depends: base >=4.6 && <4.7, hmatrix -any, MonadRandom -any, random, random-shuffle,
-                   mersenne-random-pure64
+    build-depends: base,hmatrix -any, MonadRandom,random, random-shuffle
     main-is: Main.hs
     buildable: True
     default-language: Haskell2010

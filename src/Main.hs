@@ -3,8 +3,10 @@ import Control.Monad
 import Control.Monad.Random
 --import System.Random.Mersenne.Pure64 (newPureMT)
 --import RandomList
+import System.Random
+import System.Random.Shuffle
 
-choose _ [] = error "choose: index out of range"
+{-choose _ [] = error "choose: index out of range"
 choose 0 (x:xs) = (x, xs)
 choose i (x:xs) = let (y, ys) = choose (i - 1) xs in (y, x:ys)
 
@@ -15,7 +17,7 @@ shuffle seed len xs =
        n = fst $ randomR (0, len - 1) (mkStdGen seed)
        (y, ys) = choose n xs
        ys' = shuffle seed (len - 1) ys
-    in y:ys'
+    in y:ys'-}
 
 disp = putStr . dispf 2
 latex m = putStrLn $ latexFormat "array" (dispf 2 m)
@@ -31,23 +33,23 @@ disp_ls (x:xs) = do
       disp x
       disp_ls xs
 
-generator s m 1 =
+generator s m 1 = 
            let xs = replicateM m [-s..s]
                ys = [[fromIntegral z :: Double | z <- x] | x <- xs]
-               zs = shuffle 18495758398490 (length ys) ys
-           in [zs]
-generator s m 2 =
+           in do zs <- shuffleM ys
+                 [zs]
+generator s m 2 = do
            let xs = replicateM m [-s..s]
                ys = [[fromIntegral z :: Double | z <- x] | x <- xs]
-               ys1 = shuffle 10094748500790 (length ys) ys
-               ys2 = shuffle 963547459682435 (length ys1) ys1
-           in [[x]++[y] | x<- ys1,y<- ys2]
-generator s m n =
+           ys1 <- shuffleM ys
+           ys2 <- shuffleM ys1
+           [[x]++[y] | x<- ys1,y<- ys2]
+generator s m n = do
       let xs = replicateM m [-s..s]
           ys = [[fromIntegral z :: Double | z <- x] | x <- xs]
-          ys1 = shuffle 5302946104563828 (length ys) ys
           zs = generator s m (n-1)
-      in [x++[y]| x<- zs,y<- ys1]
+      ys1 <-shuffleM ys  
+      [x++[y]| x<- zs,y<- ys1]
 
 conversion = map fromLists
 

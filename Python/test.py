@@ -97,4 +97,3 @@ for x in xs1:
     doc.append("\end{enumerate}")
     doc.append(r"\newpage")
 doc.generate_tex()
-doc.generate_pdf()

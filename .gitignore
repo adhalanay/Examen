@@ -11,3 +11,4 @@ cabal.config
 .idea
 *pdf
 *log
+*__pycache__

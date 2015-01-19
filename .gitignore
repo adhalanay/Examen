@@ -8,3 +8,6 @@ dist
 .cabal-sandbox/
 cabal.sandbox.config
 cabal.config
+.idea
+*pdf
+*log

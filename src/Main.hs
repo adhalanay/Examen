@@ -37,7 +37,7 @@ good :: Eq a => [a] -> Bool
 good [] = False
 good [x] = False
 good [x,y] = x/=y
-good (x:xs) = x/= (head xs) && good xs
+good (x:xs) = x/= (head xs) && x /= head (reverse xs) && good xs
 
 generator s m 1 =
             let  xs = replicateM m [-s..s]
@@ -56,10 +56,11 @@ generator s m n =
 
 conversion = map fromLists
 
+
 selection r1 r2 = filter (\a -> rank a >= r1 && rank a <=r2)
 
 main = do
           let xs = generator 2 5 4
-              ys = take 1000 $ selection 3 3 (conversion xs)
+              ys = take 1000 $ selection 2 2 (conversion xs)
           zs <- shuffleM ys
           disp_ls $ take 50 zs

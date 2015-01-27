@@ -46,4 +46,4 @@ xs0 = selection(generator(2, 4, 5), 2, 3)
 xs1 = []
 for j in range(10000):
     xs1.append(next(xs0))
-print(xs1[:50])
+print(xs1[:80])

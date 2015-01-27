@@ -39,25 +39,34 @@ def generator(s, m, n):
     return ys
 
 
+def column(a, i):
+    y = [lin[i] for lin in a]
+    return y
+
+
 def selection(xs, r1, r2):
     i = 0
+    z = [0]*3
     for x in xs:
-       #  print(i)
-        i += 1
-        if r1 <= lg.matrix_rank(x) <= r2 and (x[0] != x[1] != x[2] != x[3]) and (x[3] != x[0] != x[2]):
-            print(x)
+        bo = True
+        for j in range(len(x[0])):
+            bo = bo and (column(x, j) != z)
+        if r1 <= lg.matrix_rank(x) <= r2 and (x[0] != x[1] != x[2]) and (x[0] != x[2]) and bo:
+            print(i)
+            i += 1
+            #print(x)
             yield x
 
 
-xs0 = selection(generator(2, 4, 5), 2, 3)
+xs0 = selection(generator(3, 3, 4), 2, 2)
 xs=[]
 for j in range(100000):
     xs.append(next(xs0))
 rd.shuffle(xs)
 rd.shuffle(xs)
-xs1 = xs[:50]
+xs1 = xs[:80]
 ys = ["2x_1^2+5x_2^2+2x_3^2-4x_1x_2-2x_1x_3+4x_2x_3", "-x_1^2+x_2^2-5x_3^2+3x_1x_3+4x_2x_3",
-      "x_1^2+5x_2^2+x_3^2+2x_1x_2+6X_1x_3+2x_2x_3", "x_1^2-2x_2^2+x_3^2+4x_1x_2-10x_1x_3+4x_2x_3"]
+      "x_1^2+5x_2^2+x_3^2+2x_1x_2+6x_1x_3+2x_2x_3", "x_1^2-2x_2^2+x_3^2+4x_1x_2-10x_1x_3+4x_2x_3"]
 yi = it.cycle(ys)
 doc = Document(title="Probleme", author=" ", date=" ")
 doc.packages.append(Package('nopageno'))
@@ -79,11 +88,11 @@ for x in xs1:
     doc.append(r"\vspace{2cm}")
     doc.append(r"\end{center}")
     doc.append(r"\begin{enumerate}")
-    doc.append(r" \item Fie morfismul $f:\mathbb{R}^5 \to \mathbb{R}^4$ al cărui matrice în raport cu bazele canonice este")
+    doc.append(r" \item Fie morfismul $f:\mathbb{R}^4 \to \mathbb{R}^3$ al cărui matrice în raport cu bazele canonice este")
     doc.append(Math(data=[Matrix(M)]))
     doc.append(r"\begin{enumerate}")
     doc.append(r"\item Determinați cîte o bază în $Ker(f)$ și $Im(f)$;")
-    doc.append(r"\item Fie vectorul $v=(1,3,1,3)$ determinați descompunerea acestuia ca suma dintre un vector din $Im(f)$ și unul din $Im(f)^\perp$;")
+    doc.append(r"\item Fie vectorul $v=(1,3,1)$ determinați descompunerea acestuia ca suma dintre un vector din $Im(f)$ și unul din $Im(f)^\perp$;")
     doc.append(r"\item Fie $K$ un corp și fie $L=M_n(K)$. Arătați că pentru orice funcțională $f \in L^*$ există o matrice $A$ astfel încît $f(X)=Tr(AX)$;")
     doc.append("\end{enumerate}")
     doc.append(r"\item Fie forma pătratică:")

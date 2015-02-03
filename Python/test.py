@@ -65,8 +65,8 @@ for j in range(100000):
 rd.shuffle(xs)
 rd.shuffle(xs)
 xs1 = xs[:80]
-ys = ["2x_1^2+5x_2^2+2x_3^2-4x_1x_2-2x_1x_3+4x_2x_3", "-x_1^2+x_2^2-5x_3^2+3x_1x_3+4x_2x_3",
-      "x_1^2+5x_2^2+x_3^2+2x_1x_2+6x_1x_3+2x_2x_3", "x_1^2-2x_2^2+x_3^2+4x_1x_2-10x_1x_3+4x_2x_3"]
+ys = ["2x_1^2+5x_2^2+2x_3^2-4x_1x_2-2x_1x_3+4x_2x_3", "x_1^2+5x_2^2+x_3^2+2x_1x_2+6x_1x_3+2x_2x_3",
+      "x_1^2-2x_2^2+x_3^2+4x_1x_2-10x_1x_3+4x_2x_3"]
 yi = it.cycle(ys)
 doc = Document(title="Probleme", author=" ", date=" ")
 doc.packages.append(Package('nopageno'))
@@ -88,20 +88,20 @@ for x in xs1:
     doc.append(r"\vspace{2cm}")
     doc.append(r"\end{center}")
     doc.append(r"\begin{enumerate}")
-    doc.append(r" \item Fie morfismul $f:\mathbb{R}^4 \to \mathbb{R}^3$ al cărui matrice în raport cu bazele canonice este")
+    doc.append(r" \item Fie morfismul $f:\mathbb{R}^4 \to \mathbb{R}^3$ a cărui matrice în raport cu bazele canonice este")
     doc.append(Math(data=[Matrix(M)]))
     doc.append(r"\begin{enumerate}")
     doc.append(r"\item Determinați cîte o bază în $Ker(f)$ și $Im(f)$;")
-    doc.append(r"\item Fie vectorul $v=(1,3,1)$ determinați descompunerea acestuia ca suma dintre un vector din $Im(f)$ și unul din $Im(f)^\perp$;")
-    doc.append(r"\item Fie $K$ un corp și fie $L=M_n(K)$. Arătați că pentru orice funcțională $f \in L^*$ există o matrice $A$ astfel încît $f(X)=Tr(AX)$;")
+    doc.append(r"\item Fie vectorul $v=(1,3,1,3)$ determinați descompunerea acestuia ca suma dintre un vector din $Ker(f)$ și unul din $(Ker(f))^\perp$;")
+    doc.append(r"\item Fie $K$ un corp și fie $L=M_n(K)$. Există $X,Y \in L$ astfel încît $XY-YX=I_n$?  ")
     doc.append("\end{enumerate}")
     doc.append(r"\item Fie forma pătratică:")
     doc.append(Math(data=["Q=", next(yi)]))
     doc.append(r"\begin{enumerate}")
     doc.append("\item Aduceți forma pătratică la forma canonică prin metoda Gauss;")
     doc.append("\item Aduceți forma pătratică la forma canonică prin transformări ortogonale;")
-    doc.append("\item Determinați forma biliniară simetrică $B$ asociată lui $Q$ și calculați dimensiunea subspațiului")
-    doc.append(Math(data=[r"\{x \in \mathbb{R}^3 | B(x,y)=0,\forall y \in \mathbb{R}^3\}."]))
+    doc.append(r"\item Fie $\mathfrak{su}(n)=\{ A \in M_n(\mathbb{C}) | A+\bar{A}^t=0\}$. Arătați că $\mathfrak{su}(n)$ este spațiu vectorial real, dar nu complex.")
+    doc.append("Determinați $dim_{\mathbb{R}}\mathfrak{su}(n)$.")
     doc.append("\end{enumerate}")
     doc.append("\end{enumerate}")
     doc.append(r"\newpage")
